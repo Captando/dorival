@@ -3,87 +3,287 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elitte Barbearia - Em Manutenção</title>
+    <title>Agendamento | Elitte Barbearia</title>
+    
+    <!-- Favicon Tesoura Dourada (MDI) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23d4af37' d='M19,3L13,9L15,11L22,4V3M12,12.5A0.5,0.5 0 0,1 11.5,12A0.5,0.5 0 0,1 12,11.5A0.5,0.5 0 0,1 12.5,12A0.5,0.5 0 0,1 12,12.5M6,20A2,2 0 0,1 4,18C4,16.89 4.9,16 6,16A2,2 0 0,1 8,18C8,19.11 7.1,20 6,20M6,8A2,2 0 0,1 4,6C4,4.89 4.9,4 6,4A2,2 0 0,1 8,6C8,7.11 7.1,8 6,8M9.64,7.64C9.87,7.14 10,6.59 10,6A4,4 0 0,0 6,2A4,4 0 0,0 2,6A4,4 0 0,0 6,10C6.59,10 7.14,9.87 7.64,9.64L10,12L7.64,14.36C7.14,14.13 6.59,14 6,14A4,4 0 0,0 2,18A4,4 0 0,0 6,22A4,4 0 0,0 10,18C10,17.41 9.87,16.86 9.64,16.36L12,14L19,21H22V20L9.64,7.64Z'/></svg>">
+    
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome (Ícones) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
+    <!-- Configuração de Cores -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
+                    colors: {
+                        brand: {
+                            light: '#fde68a',
+                            DEFAULT: '#d4af37', // Dourado
+                            dark: '#a18023',
+                        },
+                        dark: {
+                            900: '#111111',
+                            800: '#1a1a1a',
+                            700: '#2a2a2a',
+                            600: '#3a3a3a'
+                        }
+                    },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        gold: '#D4AF37',
-                        goldHover: '#B5952F',
+                        heading: ['Oswald', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
     
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Material Design Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css">
+
     <style>
         body {
-            background-color: #09090b; /* zinc-950 */
-            color: #ffffff;
-            /* Fundo com leve textura ou gradiente escuro */
-            background-image: radial-gradient(circle at top right, #18181b 0%, #09090b 50%);
+            background-color: #111111;
+            color: #f3f4f6;
+            font-family: 'Inter', sans-serif;
         }
-        .pulse-icon {
-            animation: pulse-glow 2s infinite;
+        h1, h2, h3, .font-heading {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
         }
-        @keyframes pulse-glow {
-            0% { text-shadow: 0 0 10px rgba(212, 175, 55, 0.2); transform: scale(1); }
-            50% { text-shadow: 0 0 20px rgba(212, 175, 55, 0.6); transform: scale(1.05); }
-            100% { text-shadow: 0 0 10px rgba(212, 175, 55, 0.2); transform: scale(1); }
-        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #3a3a3a; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #d4af37; }
     </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-4">
+<body class="antialiased min-h-screen flex flex-col">
 
-    <!-- Container Principal -->
-    <div class="bg-zinc-900/80 border border-zinc-800 p-8 md:p-12 rounded-2xl shadow-2xl max-w-lg w-full text-center backdrop-blur-sm">
+    <!-- Header -->
+    <header class="bg-dark-800 border-b border-dark-700 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex items-center gap-3">
+                    <span class="mdi mdi-content-cut text-brand text-3xl transform -rotate-45"></span>
+                    <span class="font-heading font-bold text-2xl tracking-wider text-white">
+                        Elitte <span class="text-brand">Barbearia</span>
+                    </span>
+                </div>
+                <!-- Redes Sociais & Contato -->
+                <div class="flex items-center gap-2">
+                    <a href="https://wa.me/556281540490" target="_blank" rel="noopener noreferrer" 
+                       class="text-gray-400 hover:text-green-500 transition-colors duration-300 flex items-center gap-2 px-3 py-2 rounded-lg bg-dark-700 hover:bg-dark-800 border border-transparent hover:border-green-500">
+                        <i class="fa-brands fa-whatsapp text-xl"></i>
+                        <span class="hidden md:inline font-medium text-sm">(62) 8154-0490</span>
+                    </a>
+                    <a href="https://www.instagram.com/barbeariaaelitte/" target="_blank" rel="noopener noreferrer" 
+                       class="text-gray-400 hover:text-brand transition-colors duration-300 flex items-center gap-2 px-3 py-2 rounded-lg bg-dark-700 hover:bg-dark-800 border border-transparent hover:border-brand">
+                        <i class="fa-brands fa-instagram text-xl"></i>
+                        <span class="hidden lg:inline font-medium text-sm">@barbeariaaelitte</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex flex-col md:flex-row max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 lg:py-12 gap-8 lg:gap-12">
         
-        <!-- Ícone / Logo -->
-        <div class="text-gold text-5xl mb-6 flex justify-center pulse-icon">
-            <i class="fa-solid fa-scissors"></i>
+        <!-- Left Column: Formulário + Calendário -->
+        <div class="w-full lg:w-7/12 bg-dark-800 rounded-2xl border border-dark-700 shadow-2xl p-6 sm:p-8 min-h-[600px] flex flex-col relative overflow-hidden order-1">
+            
+            <!-- PASSO 1: FORMULÁRIO NATIVO -->
+            <div id="step-1-form" class="flex-grow flex flex-col justify-center transition-all duration-300">
+                <div class="text-center mb-8">
+                    <h2 class="text-2xl font-bold text-white font-heading">Preencha seus Dados</h2>
+                    <p class="text-sm text-gray-400 mt-2">Rápido e prático para liberar o calendário.</p>
+                </div>
+
+                <div class="space-y-5 max-w-md mx-auto w-full">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-1">Nome Completo <span class="text-brand">*</span></label>
+                        <input type="text" id="cliente-nome" placeholder="Ex: João Silva" class="w-full bg-dark-900 border border-dark-600 text-white rounded-xl px-4 py-3 focus:outline-none focus:border-brand transition-colors">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-1">WhatsApp <span class="text-brand">*</span></label>
+                        <input type="tel" id="cliente-zap" placeholder="(62) 99999-9999" maxlength="15" class="w-full bg-dark-900 border border-dark-600 text-white rounded-xl px-4 py-3 focus:outline-none focus:border-brand transition-colors">
+                    </div>
+                    
+                    <button id="btn-continuar" class="w-full bg-brand hover:bg-brand-dark text-dark-900 font-bold text-lg rounded-xl px-5 py-4 mt-6 transition-transform hover:scale-[1.02] shadow-lg flex items-center justify-center gap-2">
+                        Escolher Horário <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- PASSO 2: CALENDÁRIO CAL.COM (Escondido inicialmente) -->
+            <div id="step-2-calendar" class="hidden flex-grow flex-col h-full w-full">
+                <div class="text-center pb-4 mb-2 border-b border-dark-700 flex justify-between items-center">
+                    <button id="btn-voltar" class="text-gray-400 hover:text-white transition-colors text-sm font-medium flex items-center gap-2">
+                        <i class="fa-solid fa-arrow-left"></i> Voltar
+                    </button>
+                    <h2 class="text-xl font-medium text-white font-heading">Selecione a Data</h2>
+                    <div class="w-16"></div> <!-- Espaçador para centralizar o título -->
+                </div>
+
+                <div class="flex-grow w-full rounded-xl overflow-hidden bg-[#111111] relative" id="my-cal-inline">
+                    <div class="absolute inset-0 flex flex-col items-center justify-center text-gray-500 z-0 animate-pulse">
+                        <i class="fa-solid fa-circle-notch fa-spin text-3xl text-brand mb-3"></i>
+                        <p>Carregando calendário...</p>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-        <!-- Título -->
-        <h1 class="text-3xl font-bold tracking-tight mb-2">
-            Elitte Barbearia
-        </h1>
-        
-        <!-- Status -->
-        <div class="inline-flex items-center gap-2 bg-zinc-800/50 text-gold px-4 py-1.5 rounded-full text-sm font-medium mb-6 border border-zinc-700/50">
-            <span class="relative flex h-2.5 w-2.5">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold opacity-75"></span>
-              <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-gold"></span>
-            </span>
-            Site em Manutenção
+        <!-- Right Column: Info & Imagem -->
+        <div class="w-full lg:w-5/12 flex flex-col gap-6 order-2">
+            <div class="relative w-full h-64 sm:h-80 rounded-2xl overflow-hidden shadow-2xl border border-dark-700">
+                <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                     alt="Barbeiro trabalhando" 
+                     class="object-cover w-full h-full opacity-80 transition-transform duration-700 hover:scale-105">
+                <div class="absolute inset-0 bg-gradient-to-t from-dark-900 via-transparent to-transparent"></div>
+                <div class="absolute bottom-4 left-4 right-4">
+                    <h2 class="text-2xl font-bold text-white font-heading">Estilo & Excelência</h2>
+                    <p class="text-gray-300 text-sm mt-1">Onde o clássico encontra o moderno.</p>
+                </div>
+            </div>
+
+            <div class="bg-dark-800 rounded-2xl p-6 sm:p-8 border border-dark-700 shadow-xl">
+                <h1 class="text-3xl sm:text-4xl font-bold text-white font-heading mb-4 border-l-4 border-brand pl-4">
+                    Agende seu <br/><span class="text-brand">Horário</span>
+                </h1>
+                <p class="text-gray-400 mb-6 leading-relaxed">
+                    Escolha a data e o melhor horário no calendário. O sistema irá solicitar seus dados rapidamente para confirmar a reserva do seu corte.
+                </p>
+                
+                <div class="space-y-4">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-full bg-dark-700 text-brand flex items-center justify-center flex-shrink-0">
+                            <i class="fa-solid fa-clock"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-medium text-white">Pontualidade</h3>
+                            <p class="text-sm text-gray-400">Por favor, chegue com 5 minutos de antecedência.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- Mensagem -->
-        <p class="text-zinc-400 mb-8 leading-relaxed">
-            Estamos melhorando nosso sistema de agendamentos para oferecer uma experiência ainda melhor para você. Voltaremos ao ar muito em breve!
-        </p>
+    </main>
 
-        <!-- Botões de Contato Alternativo -->
-        <div class="flex flex-col gap-3">
-            <!-- Instagram -->
-            <a href="https://www.instagram.com/barbeariaaelitte/" target="_blank" 
-               class="flex items-center justify-center gap-2 w-full bg-gold hover:bg-goldHover text-zinc-950 font-bold py-3.5 px-4 rounded-xl transition-all duration-300 transform hover:scale-[1.02]">
-                <i class="fa-brands fa-instagram text-xl"></i>
-                Acompanhe nosso Instagram
-            </a>
+    <!-- Footer -->
+    <footer class="bg-dark-800 border-t border-dark-700 py-6 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 text-center text-gray-500 text-sm">
+            <p>&copy; 2026 Elitte Barbearia. Todos os direitos reservados.</p>
+            <p class="mt-2">Feito com <i class="fa-solid fa-heart text-brand mx-1"></i> para o melhor estilo.</p>
         </div>
-        
-    </div>
+    </footer>
 
+    <!-- Botão Flutuante do WhatsApp -->
+    <a href="https://wa.me/556281540490?text=Olá! Gostaria de tirar uma dúvida sobre a barbearia." target="_blank" rel="noopener noreferrer" 
+       class="fixed bottom-6 right-6 bg-[#25D366] hover:bg-[#128C7E] text-white rounded-full w-14 h-14 flex items-center justify-center text-3xl shadow-lg hover:scale-110 transition-transform duration-300 z-50">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- SCRIPT DE INTEGRAÇÃO DO CAL.COM -->
+    <script>
+        (function (C, A, L) {
+            let p = function (a, ar) { a.q.push(ar); };
+            let d = C.document;
+            C.Cal = C.Cal || function () {
+                let cal = C.Cal; let ar = arguments;
+                if (!cal.loaded) {
+                    cal.ns = {}; cal.q = cal.q || [];
+                    d.head.appendChild(d.createElement("script")).src = A;
+                    cal.loaded = true;
+                }
+                if (ar[0] === L) {
+                    const api = function () { p(api, arguments); };
+                    const namespace = ar[1];
+                    api.q = api.q || [];
+                    typeof namespace === "string" ? (cal.ns[namespace] = cal.ns[namespace] || api) : p(cal, ar);
+                    return;
+                }
+                p(cal, ar);
+            };
+        })(window, "https://app.cal.com/embed/embed.js", "init");
+
+        // LÓGICA DO FORMULÁRIO + CALENDÁRIO
+        const step1 = document.getElementById('step-1-form');
+        const step2 = document.getElementById('step-2-calendar');
+        const btnContinuar = document.getElementById('btn-continuar');
+        const btnVoltar = document.getElementById('btn-voltar');
+        
+        let calInitialized = false;
+
+        btnContinuar.addEventListener('click', () => {
+            const nome = document.getElementById('cliente-nome').value.trim();
+            const zapRaw = document.getElementById('cliente-zap').value.trim();
+
+            if (!nome || !zapRaw) {
+                // Alerta nativo simples caso não preencha
+                alert("Por favor, preencha o seu Nome e WhatsApp antes de escolher o horário.");
+                return;
+            }
+
+            // Limpa e formata o número para o padrão do n8n (ex: +5562999999999)
+            let zap = zapRaw.replace(/\D/g, ''); // Remove tudo o que não é número
+            if (zap.length > 0 && !zap.startsWith('55')) {
+                zap = '55' + zap;
+            }
+            zap = '+' + zap;
+
+            // Esconde Passo 1 e Mostra Passo 2
+            step1.classList.add('hidden');
+            step1.classList.remove('flex');
+            step2.classList.remove('hidden');
+            step2.classList.add('flex');
+
+            // Inicializa o Cal.com injetando os dados e forçando o idioma
+            if (!calInitialized) {
+                Cal("init", {origin:"https://cal.com"});
+
+                // Passa o nome e o whatsapp (agora no campo location para o n8n), forçando pt-br
+                const finalLink = "barbeariaelitte/horarios?name=" + encodeURIComponent(nome) + "&location=" + encodeURIComponent(zap) + "&locale=pt-br";
+
+                Cal("inline", {
+                    elementOrSelector:"#my-cal-inline",
+                    calLink: finalLink, 
+                    layout: "month_view"
+                });
+
+                Cal("ui", {
+                    "styles": {
+                        "branding": {
+                            "brandColor": "#d4af37" 
+                        }
+                    },
+                    "hideEventTypeDetails": false,
+                    "layout": "month_view",
+                    "theme": "dark"
+                });
+                
+                calInitialized = true;
+            }
+        });
+
+        // Botão para voltar ao formulário se precisar corrigir dados
+        btnVoltar.addEventListener('click', () => {
+            step2.classList.add('hidden');
+            step2.classList.remove('flex');
+            step1.classList.remove('hidden');
+            step1.classList.add('flex');
+        });
+    </script>
 </body>
 </html>
