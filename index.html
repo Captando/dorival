@@ -3,198 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Typebot</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <title>Elitte Barbearia - Em Manutenção</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome (Ícones) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        gold: '#D4AF37',
+                        goldHover: '#B5952F',
+                    }
+                }
+            }
+        }
+    </script>
+    
     <style>
-        :root {
-            --primary-color: #3498db;
-            --secondary-color: #2980b9;
-            --text-color: #333;
-            --bg-color: #f8f9fa;
-            --loading-color: #e74c3c;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            overflow-x: hidden;
+            background-color: #09090b; /* zinc-950 */
+            color: #ffffff;
+            /* Fundo com leve textura ou gradiente escuro */
+            background-image: radial-gradient(circle at top right, #18181b 0%, #09090b 50%);
         }
-
-        .container {
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
+        .pulse-icon {
+            animation: pulse-glow 2s infinite;
         }
-
-        header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 1rem;
-            text-align: center;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            z-index: 100;
-        }
-
-        .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        .main-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-        }
-
-        #typebot-container {
-            width: 100%;
-            height: 100%;
-            border: none;
-            transition: opacity 0.5s ease;
-            opacity: 0;
-        }
-
-        .loader {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 1;
-        }
-
-        .loading-spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid rgba(0, 0, 0, 0.1);
-            border-top-color: var(--loading-color);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        .loading-text {
-            margin-top: 1rem;
-            font-size: 1.2rem;
-            color: var(--primary-color);
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .fade-in {
-            animation: fadeIn 1s ease forwards;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .bounce-in {
-            animation: bounceIn 0.8s ease forwards;
-        }
-
-        @keyframes bounceIn {
-            0% { transform: scale(0.8); opacity: 0; }
-            70% { transform: scale(1.05); opacity: 1; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        @media (max-width: 768px) {
-            header {
-                padding: 0.8rem;
-            }
-
-            .logo {
-                font-size: 1.2rem;
-            }
-
-            .loading-spinner {
-                width: 40px;
-                height: 40px;
-            }
-
-            .loading-text {
-                font-size: 1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            header {
-                padding: 0.6rem;
-            }
-
-            .logo {
-                font-size: 1rem;
-            }
+        @keyframes pulse-glow {
+            0% { text-shadow: 0 0 10px rgba(212, 175, 55, 0.2); transform: scale(1); }
+            50% { text-shadow: 0 0 20px rgba(212, 175, 55, 0.6); transform: scale(1.05); }
+            100% { text-shadow: 0 0 10px rgba(212, 175, 55, 0.2); transform: scale(1); }
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <header class="animate__animated animate__fadeInDown">
-            <div class="header-content">
-                <div class="logo">
-                    <i class="fas fa-comments"></i> Barbearia
-                </div>
-            </div>
-        </header>
+<body class="min-h-screen flex items-center justify-center p-4">
 
-        <div class="main-content">
-            <div class="loader bounce-in">
-                <div class="loading-spinner"></div>
-                <div class="loading-text">Carregando...</div>
-            </div>
-            <iframe 
-                id="typebot-container" 
-                src="https://hooks.ibcappa.com.br/barbearia" 
-                allow="camera; microphone; autoplay; encrypted-media;">
-            </iframe>
+    <!-- Container Principal -->
+    <div class="bg-zinc-900/80 border border-zinc-800 p-8 md:p-12 rounded-2xl shadow-2xl max-w-lg w-full text-center backdrop-blur-sm">
+        
+        <!-- Ícone / Logo -->
+        <div class="text-gold text-5xl mb-6 flex justify-center pulse-icon">
+            <i class="fa-solid fa-scissors"></i>
         </div>
+
+        <!-- Título -->
+        <h1 class="text-3xl font-bold tracking-tight mb-2">
+            Elitte Barbearia
+        </h1>
+        
+        <!-- Status -->
+        <div class="inline-flex items-center gap-2 bg-zinc-800/50 text-gold px-4 py-1.5 rounded-full text-sm font-medium mb-6 border border-zinc-700/50">
+            <span class="relative flex h-2.5 w-2.5">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-gold"></span>
+            </span>
+            Site em Manutenção
+        </div>
+
+        <!-- Mensagem -->
+        <p class="text-zinc-400 mb-8 leading-relaxed">
+            Estamos melhorando nosso sistema de agendamentos para oferecer uma experiência ainda melhor para você. Voltaremos ao ar muito em breve!
+        </p>
+
+        <!-- Botões de Contato Alternativo -->
+        <div class="flex flex-col gap-3">
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/barbeariaaelitte/" target="_blank" 
+               class="flex items-center justify-center gap-2 w-full bg-gold hover:bg-goldHover text-zinc-950 font-bold py-3.5 px-4 rounded-xl transition-all duration-300 transform hover:scale-[1.02]">
+                <i class="fa-brands fa-instagram text-xl"></i>
+                Acompanhe nosso Instagram
+            </a>
+        </div>
+        
     </div>
 
-    <script>
-        // Animação de carregamento
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.querySelector('.loader').style.display = 'none';
-                const iframe = document.getElementById('typebot-container');
-                iframe.style.opacity = '1';
-                iframe.classList.add('fade-in');
-            }, 1500);
-        });
-
-        // Verificar se o dispositivo é móvel
-        function isMobile() {
-            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-        }
-
-        // Ajustar layout para dispositivos móveis
-        if (isMobile()) {
-            document.body.classList.add('mobile');
-        }
-    </script>
 </body>
 </html>
