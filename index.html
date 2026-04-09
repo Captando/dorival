@@ -243,6 +243,9 @@
             }
             zap = '+' + zap;
 
+            // Cria um e-mail fictício (mock) único baseado no número de telemóvel, pois o Cal.com exige e-mail
+            const emailMock = zap.replace(/\D/g, '') + "@elitte.com";
+
             // Esconde Passo 1 e Mostra Passo 2
             step1.classList.add('hidden');
             step1.classList.remove('flex');
@@ -253,13 +256,17 @@
             if (!calInitialized) {
                 Cal("init", {origin:"https://cal.com"});
 
-                // Passa o nome e o whatsapp (agora no campo location para o n8n), forçando pt-br
-                const finalLink = "barbeariaelitte/horarios?name=" + encodeURIComponent(nome) + "&location=" + encodeURIComponent(zap) + "&locale=pt-br";
-
+                // Usa o objeto "config" nativo do Cal.com para forçar o preenchimento dos dados (mais confiável que URL)
                 Cal("inline", {
                     elementOrSelector:"#my-cal-inline",
-                    calLink: finalLink, 
-                    layout: "month_view"
+                    calLink: "barbeariaelitte/horarios", 
+                    layout: "month_view",
+                    config: {
+                        name: nome,
+                        email: emailMock,
+                        location: zap, // Tenta injetar no location para o n8n
+                        notes: "WhatsApp: " + zap // Backup garantido nas anotações
+                    }
                 });
 
                 Cal("ui", {
