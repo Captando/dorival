@@ -223,21 +223,40 @@
         const step2 = document.getElementById('step-2-calendar');
         const btnContinuar = document.getElementById('btn-continuar');
         const btnVoltar = document.getElementById('btn-voltar');
+        const inputZap = document.getElementById('cliente-zap');
         
         let calInitialized = false;
 
+        // Máscara de WhatsApp em tempo real
+        inputZap.addEventListener('input', function (e) {
+            let valor = e.target.value.replace(/\D/g, ''); // Remove tudo o que não é número
+            let formatado = '';
+            
+            if (valor.length > 0) {
+                formatado = '(' + valor.substring(0, 2);
+                if (valor.length > 2) {
+                    formatado += ') ' + valor.substring(2, 7);
+                    if (valor.length > 7) {
+                        formatado += '-' + valor.substring(7, 11);
+                    }
+                }
+            }
+            e.target.value = formatado;
+        });
+
         btnContinuar.addEventListener('click', () => {
             const nome = document.getElementById('cliente-nome').value.trim();
-            const zapRaw = document.getElementById('cliente-zap').value.trim();
+            const zapRaw = inputZap.value;
+            const zapLimpo = zapRaw.replace(/\D/g, ''); // Pega apenas os números digitados
 
-            if (!nome || !zapRaw) {
-                // Alerta nativo simples caso não preencha
-                alert("Por favor, preencha o seu Nome e WhatsApp antes de escolher o horário.");
+            if (!nome || zapLimpo.length < 10) {
+                // Alerta caso não preencha ou o número seja muito curto
+                alert("Por favor, preencha o seu Nome completo e um WhatsApp válido (com DDD) antes de escolher o horário.");
                 return;
             }
 
             // Limpa e formata o número para o padrão do n8n (ex: +5562999999999)
-            let zap = zapRaw.replace(/\D/g, ''); // Remove tudo o que não é número
+            let zap = zapLimpo;
             if (zap.length > 0 && !zap.startsWith('55')) {
                 zap = '55' + zap;
             }
