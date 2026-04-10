@@ -11,6 +11,9 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
+    <!-- Lottie Player -->
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    
     <!-- Configuração de Cores -->
     <script>
         tailwind.config = {
@@ -104,8 +107,8 @@
             <!-- PASSO 1: FORMULÁRIO NATIVO -->
             <div id="step-1-form" class="flex-grow flex flex-col justify-center transition-all duration-300">
                 <div class="text-center mb-8">
-                    <h2 class="text-2xl font-bold text-white font-heading">Preencha seus Dados</h2>
-                    <p class="text-sm text-gray-400 mt-2">Rápido e prático para liberar o calendário.</p>
+                    <h2 class="text-2xl font-bold text-white font-heading">Preencha os seus Dados</h2>
+                    <p class="text-sm text-gray-400 mt-2">Rápido e prático para libertar o calendário.</p>
                 </div>
 
                 <div class="space-y-5 max-w-md mx-auto w-full">
@@ -137,21 +140,30 @@
                 <div class="flex-grow w-full rounded-xl overflow-hidden bg-[#111111] relative" id="my-cal-inline">
                     <div class="absolute inset-0 flex flex-col items-center justify-center text-gray-500 z-0 animate-pulse">
                         <i class="fa-solid fa-circle-notch fa-spin text-3xl text-brand mb-3"></i>
-                        <p>Carregando calendário...</p>
+                        <p>A carregar calendário...</p>
                     </div>
                 </div>
             </div>
 
         </div>
 
-        <!-- Right Column: Info & Imagem -->
+        <!-- Right Column: Info & Imagem/Lottie -->
         <div class="w-full lg:w-5/12 flex flex-col gap-6 order-2">
-            <div class="relative w-full h-64 sm:h-80 rounded-2xl overflow-hidden shadow-2xl border border-dark-700">
-                <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
-                     alt="Barbeiro trabalhando" 
-                     class="object-cover w-full h-full opacity-80 transition-transform duration-700 hover:scale-105">
-                <div class="absolute inset-0 bg-gradient-to-t from-dark-900 via-transparent to-transparent"></div>
-                <div class="absolute bottom-4 left-4 right-4">
+            
+            <!-- Substituição da imagem estática pelo Lottie Player -->
+            <div class="relative w-full h-64 sm:h-80 rounded-2xl overflow-hidden shadow-2xl border border-dark-700 bg-dark-900 flex items-center justify-center">
+                
+                <lottie-player 
+                    src="Barber.json" 
+                    background="transparent" 
+                    speed="1" 
+                    style="width: 80%; height: 80%;" 
+                    loop 
+                    autoplay>
+                </lottie-player>
+
+                <div class="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/40 to-transparent pointer-events-none"></div>
+                <div class="absolute bottom-4 left-4 right-4 z-10 pointer-events-none">
                     <h2 class="text-2xl font-bold text-white font-heading">Estilo & Excelência</h2>
                     <p class="text-gray-300 text-sm mt-1">Onde o clássico encontra o moderno.</p>
                 </div>
@@ -159,10 +171,10 @@
 
             <div class="bg-dark-800 rounded-2xl p-6 sm:p-8 border border-dark-700 shadow-xl">
                 <h1 class="text-3xl sm:text-4xl font-bold text-white font-heading mb-4 border-l-4 border-brand pl-4">
-                    Agende seu <br/><span class="text-brand">Horário</span>
+                    Agende o seu <br/><span class="text-brand">Horário</span>
                 </h1>
                 <p class="text-gray-400 mb-6 leading-relaxed">
-                    Escolha a data e o melhor horário no calendário. O sistema irá solicitar seus dados rapidamente para confirmar a reserva do seu corte.
+                    Escolha a data e o melhor horário no calendário. O sistema irá solicitar os seus dados rapidamente para confirmar a reserva do seu corte.
                 </p>
                 
                 <div class="space-y-4">
