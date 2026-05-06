@@ -150,7 +150,7 @@
         <!-- Right Column: Info & Imagem/Lottie -->
         <div class="w-full lg:w-5/12 flex flex-col gap-6 order-2">
             
-            <!-- Substituição da imagem estática pelo Lottie Player -->
+            <!-- Lottie Player -->
             <div class="relative w-full h-64 sm:h-80 rounded-2xl overflow-hidden shadow-2xl border border-dark-700 bg-dark-900 flex items-center justify-center">
                 
                 <lottie-player 
@@ -207,8 +207,25 @@
         <i class="fa-brands fa-whatsapp"></i>
     </a>
 
-    <!-- SCRIPT DE INTEGRAÇÃO DO CAL.COM -->
+    <!-- SCRIPT DE INTEGRAÇÃO DO CAL.COM E WEBHOOK -->
     <script>
+        // Função para disparar dados para o Webhook do n8n
+        async function enviarParaWebhook(dados) {
+            const webhookUrl = "https://webhook.divulgadigital.net/webhook/3168f2d7-51e9-481d-8f12-b61c3dd7996f";
+            try {
+                await fetch(webhookUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(dados)
+                });
+                console.log("Dados enviados para o webhook com sucesso!", dados.tipo_evento);
+            } catch (error) {
+                console.error("Erro ao enviar dados para o webhook:", error);
+            }
+        }
+
         (function (C, A, L) {
             let p = function (a, ar) { a.q.push(ar); };
             let d = C.document;
@@ -267,17 +284,24 @@
                 return;
             }
 
-            // Limpa e formata o número para o padrão do n8n (ex: +5562999999999)
+            // Limpa e formata o número para o padrão (ex: +5562999999999)
             let zap = zapLimpo;
             if (zap.length > 0 && !zap.startsWith('55')) {
                 zap = '55' + zap;
             }
             zap = '+' + zap;
 
-            // Cria um e-mail fictício (mock) único baseado no número de telemóvel, pois o Cal.com exige e-mail
+            // ---- DISPARO 1: Captura de Lead (Abandono de agendamento) ----
+            enviarParaWebhook({
+                tipo_evento: "lead_iniciado",
+                nome: nome,
+                whatsapp: zap
+            });
+
+            // Cria um e-mail fictício (mock) único baseado no número de telefone, pois o Cal.com exige e-mail
             const emailMock = zap.replace(/\D/g, '') + "@elitte.com";
 
-            // Formata o location EXATAMENTE como um objeto JSON para o Cal.com aceitar e jogar pro webhook
+            // Formata o location EXATAMENTE como um objeto JSON para o Cal.com aceitar
             const locationData = { value: zap, optionValue: "" };
 
             // Esconde Passo 1 e Mostra Passo 2
@@ -303,7 +327,7 @@
                     config: {
                         name: nome,
                         email: emailMock,
-                        location: locationData // Passando o objeto formatado na config também
+                        location: locationData
                     }
                 });
 
@@ -316,6 +340,20 @@
                     "hideEventTypeDetails": false,
                     "layout": "month_view",
                     "theme": "dark"
+                });
+
+                // ---- DISPARO 2: Agendamento Concluído com Sucesso ----
+                // Fica ouvindo os eventos do Cal.com para pegar o horário escolhido
+                Cal("on", {
+                    action: "bookingSuccessful",
+                    callback: (e) => {
+                        enviarParaWebhook({
+                            tipo_evento: "agendamento_concluido",
+                            nome: nome,
+                            whatsapp: zap,
+                            horario_agendado: e.detail // Retorna todos os dados da reserva (data, hora, etc)
+                        });
+                    }
                 });
                 
                 calInitialized = true;
