@@ -298,8 +298,6 @@
                 whatsapp: zap
             });
 
-            // Cria um e-mail fictício (mock) único baseado no número de telefone, pois o Cal.com exige e-mail
-            const emailMock = zap.replace(/\D/g, '') + "@elitte.com";
 
             // Formata o location EXATAMENTE como um objeto JSON para o Cal.com aceitar
             const locationData = { value: zap, optionValue: "" };
@@ -316,7 +314,6 @@
 
                 // Passa os parâmetros via URL com o location codificado como JSON stringificado
                 const finalLink = "barbeariaelitte/horarios?name=" + encodeURIComponent(nome) + 
-                                  "&email=" + encodeURIComponent(emailMock) + 
                                   "&location=" + encodeURIComponent(JSON.stringify(locationData)) + 
                                   "&locale=pt-br";
 
