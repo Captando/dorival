@@ -1,368 +1,525 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agendamento | Elitte Barbearia</title>
-    
-    <!-- Favicon Tesoura Dourada (MDI) -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23d4af37' d='M19,3L13,9L15,11L22,4V3M12,12.5A0.5,0.5 0 0,1 11.5,12A0.5,0.5 0 0,1 12,11.5A0.5,0.5 0 0,1 12.5,12A0.5,0.5 0 0,1 12,12.5M6,20A2,2 0 0,1 4,18C4,16.89 4.9,16 6,16A2,2 0 0,1 8,18C8,19.11 7.1,20 6,20M6,8A2,2 0 0,1 4,6C4,4.89 4.9,4 6,4A2,2 0 0,1 8,6C8,7.11 7.1,8 6,8M9.64,7.64C9.87,7.14 10,6.59 10,6A4,4 0 0,0 6,2A4,4 0 0,0 2,6A4,4 0 0,0 6,10C6.59,10 7.14,9.87 7.64,9.64L10,12L7.64,14.36C7.14,14.13 6.59,14 6,14A4,4 0 0,0 2,18A4,4 0 0,0 6,22A4,4 0 0,0 10,18C10,17.41 9.87,16.86 9.64,16.36L12,14L19,21H22V20L9.64,7.64Z'/></svg>">
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Lottie Player -->
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-    
-    <!-- Configuração de Cores -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            light: '#fde68a',
-                            DEFAULT: '#d4af37', // Dourado
-                            dark: '#a18023',
-                        },
-                        dark: {
-                            900: '#111111',
-                            800: '#1a1a1a',
-                            700: '#2a2a2a',
-                            600: '#3a3a3a'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        heading: ['Oswald', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <meta name="description" content="Agende seu horário na Elitte Barbearia de forma rápida e prática." />
+  <title>Agendamento | Elitte Barbearia</title>
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23d8b45a' d='M19,3L13,9L15,11L22,4V3M12,12.5A0.5,0.5 0 0,1 11.5,12A0.5,0.5 0 0,1 12,11.5A0.5,0.5 0 0,1 12.5,12A0.5,0.5 0 0,1 12,12.5M6,20A2,2 0 0,1 4,18C4,16.89 4.9,16 6,16A2,2 0 0,1 8,18C8,19.11 7.1,20 6,20M6,8A2,2 0 0,1 4,6C4,4.89 4.9,4 6,4A2,2 0 0,1 8,6C8,7.11 7.1,8 6,8M9.64,7.64C9.87,7.14 10,6.59 10,6A4,4 0 0,0 6,2A4,4 0 0,0 2,6A4,4 0 0,0 6,10C6.59,10 7.14,9.87 7.64,9.64L10,12L7.64,14.36C7.14,14.13 6.59,14 6,14A4,4 0 0,0 2,18A4,4 0 0,0 6,22A4,4 0 0,0 10,18C10,17.41 9.87,16.86 9.64,16.36L12,14L19,21H22V20L9.64,7.64Z'/></svg>" />
 
-    <!-- Material Design Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
 
-    <style>
-        body {
-            background-color: #111111;
-            color: #f3f4f6;
-            font-family: 'Inter', sans-serif;
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: '#0a0a0a',
+            panel: '#111111',
+            panel2: '#171717',
+            line: '#282828',
+            gold: '#d8b45a',
+            gold2: '#f0d98e'
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Oswald', 'sans-serif']
+          },
+          boxShadow: {
+            glow: '0 0 0 1px rgba(216,180,90,.12), 0 28px 90px rgba(0,0,0,.48)',
+            gold: '0 12px 38px rgba(216,180,90,.18)'
+          }
         }
-        h1, h2, h3, .font-heading {
-            font-family: 'Oswald', sans-serif;
-            text-transform: uppercase;
-        }
-        
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #3a3a3a; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #d4af37; }
-    </style>
+      }
+    }
+  </script>
+
+  <style>
+    :root { color-scheme: dark; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: #f5f5f5;
+      background:
+        radial-gradient(circle at 14% 12%, rgba(216,180,90,.09), transparent 28rem),
+        radial-gradient(circle at 90% 88%, rgba(216,180,90,.055), transparent 30rem),
+        #0a0a0a;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .045;
+      z-index: -1;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.78' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E");
+    }
+    .font-display { font-family: 'Oswald', sans-serif; }
+    .hairline { background: linear-gradient(90deg, transparent, rgba(216,180,90,.65), transparent); }
+    .glass { background: linear-gradient(180deg, rgba(24,24,24,.88), rgba(14,14,14,.94)); backdrop-filter: blur(18px); }
+    .shine { position: relative; overflow: hidden; }
+    .shine::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      transform: translateX(-120%);
+      background: linear-gradient(110deg, transparent 35%, rgba(255,255,255,.18) 50%, transparent 65%);
+      transition: transform .75s ease;
+    }
+    .shine:hover::after { transform: translateX(120%); }
+    .field:focus-within { border-color: rgba(216,180,90,.8); box-shadow: 0 0 0 4px rgba(216,180,90,.08); }
+    .step-dot.active { background: #d8b45a; color: #0a0a0a; border-color: #d8b45a; }
+    .step-dot.done { background: rgba(216,180,90,.16); color: #f0d98e; border-color: rgba(216,180,90,.42); }
+    .view-enter { animation: viewIn .38s cubic-bezier(.2,.7,.2,1) both; }
+    @keyframes viewIn { from { opacity: 0; transform: translateY(10px) scale(.99); } to { opacity: 1; transform: none; } }
+    .orb { animation: float 7s ease-in-out infinite; }
+    @keyframes float { 0%,100% { transform: translate3d(0,0,0); } 50% { transform: translate3d(0,-12px,0); } }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+    ::selection { background: #d8b45a; color: #0a0a0a; }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #0a0a0a; }
+    ::-webkit-scrollbar-thumb { background: #343434; border-radius: 99px; }
+    ::-webkit-scrollbar-thumb:hover { background: #d8b45a; }
+    #my-cal-inline { min-height: 690px; }
+    @media (max-width: 767px) { #my-cal-inline { min-height: 740px; } }
+  </style>
 </head>
-<body class="antialiased min-h-screen flex flex-col">
+<body class="antialiased">
 
-    <!-- Header -->
-    <header class="bg-dark-800 border-b border-dark-700 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <!-- Logo -->
-                <div class="flex items-center gap-3">
-                    <span class="mdi mdi-content-cut text-brand text-3xl transform -rotate-45"></span>
-                    <span class="font-heading font-bold text-2xl tracking-wider text-white">
-                        Elitte <span class="text-brand">Barbearia</span>
-                    </span>
-                </div>
-                <!-- Redes Sociais & Contato -->
-                <div class="flex items-center gap-2">
-                    <a href="https://wa.me/556281540490" target="_blank" rel="noopener noreferrer" 
-                       class="text-gray-400 hover:text-green-500 transition-colors duration-300 flex items-center gap-2 px-3 py-2 rounded-lg bg-dark-700 hover:bg-dark-800 border border-transparent hover:border-green-500">
-                        <i class="fa-brands fa-whatsapp text-xl"></i>
-                        <span class="hidden md:inline font-medium text-sm">(62) 8154-0490</span>
-                    </a>
-                    <a href="https://www.instagram.com/barbeariaaelitte/" target="_blank" rel="noopener noreferrer" 
-                       class="text-gray-400 hover:text-brand transition-colors duration-300 flex items-center gap-2 px-3 py-2 rounded-lg bg-dark-700 hover:bg-dark-800 border border-transparent hover:border-brand">
-                        <i class="fa-brands fa-instagram text-xl"></i>
-                        <span class="hidden lg:inline font-medium text-sm">@barbeariaaelitte</span>
-                    </a>
-                </div>
-            </div>
+  <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none" aria-hidden="true">
+    <div class="orb absolute -top-32 -left-24 w-80 h-80 rounded-full border border-gold/10"></div>
+    <div class="orb absolute top-1/3 -right-40 w-[28rem] h-[28rem] rounded-full border border-white/5" style="animation-delay:-2.7s"></div>
+  </div>
+
+  <header class="sticky top-0 z-50 border-b border-white/[.06] bg-ink/85 backdrop-blur-xl">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[72px] flex items-center justify-between gap-4">
+      <a href="#" class="group flex items-center gap-3 min-w-0" aria-label="Elitte Barbearia">
+        <div class="w-10 h-10 rounded-xl bg-gold text-ink flex items-center justify-center shadow-gold group-hover:rotate-6 transition-transform">
+          <i class="fa-solid fa-scissors -rotate-45"></i>
         </div>
-    </header>
+        <div class="min-w-0 leading-none">
+          <div class="font-display font-bold text-[22px] tracking-[.08em] uppercase truncate">Elitte</div>
+          <div class="text-[9px] text-gold uppercase tracking-[.30em] mt-1">Barbearia</div>
+        </div>
+      </a>
 
-    <!-- Main Content -->
-    <main class="flex-grow flex flex-col md:flex-row max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 lg:py-12 gap-8 lg:gap-12">
-        
-        <!-- Left Column: Formulário + Calendário -->
-        <div class="w-full lg:w-7/12 bg-dark-800 rounded-2xl border border-dark-700 shadow-2xl p-6 sm:p-8 min-h-[600px] flex flex-col relative overflow-hidden order-1">
-            
-            <!-- PASSO 1: FORMULÁRIO NATIVO -->
-            <div id="step-1-form" class="flex-grow flex flex-col justify-center transition-all duration-300">
-                <div class="text-center mb-8">
-                    <h2 class="text-2xl font-bold text-white font-heading">Preencha os seus Dados</h2>
-                    <p class="text-sm text-gray-400 mt-2">Rápido e prático para libertar o calendário.</p>
-                </div>
+      <div class="flex items-center gap-2">
+        <a href="https://www.instagram.com/barbeariaaelitte/" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl border border-white/10 bg-white/[.03] text-zinc-400 hover:text-white hover:border-white/20 transition flex items-center justify-center" aria-label="Instagram">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://wa.me/556281540490" target="_blank" rel="noopener noreferrer" class="h-10 px-3 sm:px-4 rounded-xl border border-gold/25 bg-gold/[.07] text-gold2 hover:bg-gold hover:text-ink transition flex items-center gap-2 text-sm font-semibold">
+          <i class="fa-brands fa-whatsapp text-base"></i>
+          <span class="hidden sm:inline">Falar no WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </header>
 
-                <div class="space-y-5 max-w-md mx-auto w-full">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-300 mb-1">Nome Completo <span class="text-brand">*</span></label>
-                        <input type="text" id="cliente-nome" placeholder="Ex: João Silva" class="w-full bg-dark-900 border border-dark-600 text-white rounded-xl px-4 py-3 focus:outline-none focus:border-brand transition-colors">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-300 mb-1">WhatsApp <span class="text-brand">*</span></label>
-                        <input type="tel" id="cliente-zap" placeholder="(62) 99999-9999" maxlength="15" class="w-full bg-dark-900 border border-dark-600 text-white rounded-xl px-4 py-3 focus:outline-none focus:border-brand transition-colors">
-                    </div>
-                    
-                    <button id="btn-continuar" class="w-full bg-brand hover:bg-brand-dark text-dark-900 font-bold text-lg rounded-xl px-5 py-4 mt-6 transition-transform hover:scale-[1.02] shadow-lg flex items-center justify-center gap-2">
-                        Escolher Horário <i class="fa-solid fa-arrow-right"></i>
-                    </button>
-                </div>
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-7 sm:pt-10 lg:pt-14 pb-12 lg:pb-16">
+    <section class="grid lg:grid-cols-[.86fr_1.14fr] gap-6 lg:gap-8 items-stretch">
+
+      <aside class="glass border border-white/[.07] rounded-[28px] shadow-glow overflow-hidden relative min-h-[600px] lg:min-h-[720px] order-2 lg:order-1">
+        <div class="absolute inset-0 pointer-events-none bg-[linear-gradient(135deg,rgba(216,180,90,.06),transparent_38%)]"></div>
+        <div class="relative h-full p-6 sm:p-8 lg:p-10 flex flex-col">
+          <div class="inline-flex self-start items-center gap-2 rounded-full border border-gold/20 bg-gold/[.06] px-3 py-1.5 text-[11px] uppercase tracking-[.16em] font-semibold text-gold2">
+            <span class="w-1.5 h-1.5 rounded-full bg-gold animate-pulse"></span>
+            Agendamento online
+          </div>
+
+          <div class="mt-8 sm:mt-10 max-w-xl">
+            <p class="font-display uppercase tracking-[.22em] text-xs text-zinc-500 mb-3">Seu horário, sem complicação</p>
+            <h1 class="font-display uppercase font-semibold text-[clamp(2.8rem,6vw,5.7rem)] lg:text-[4.4rem] leading-[.92] tracking-[-.025em]">
+              Corte no <span class="text-gold">seu</span><br />tempo.
+            </h1>
+            <p class="mt-6 text-zinc-400 leading-7 max-w-md text-[15px]">
+              Informe seus dados, escolha o melhor horário disponível e finalize a reserva em poucos passos.
+            </p>
+          </div>
+
+          <div class="mt-8 grid sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3 gap-3">
+            <div class="rounded-2xl border border-white/[.07] bg-black/20 p-4">
+              <i class="fa-regular fa-calendar-check text-gold"></i>
+              <div class="mt-3 text-sm font-semibold">Agenda online</div>
+              <div class="text-xs text-zinc-500 mt-1">Escolha a melhor data.</div>
             </div>
-
-            <!-- PASSO 2: CALENDÁRIO CAL.COM (Escondido inicialmente) -->
-            <div id="step-2-calendar" class="hidden flex-grow flex-col h-full w-full">
-                <div class="text-center pb-4 mb-2 border-b border-dark-700 flex justify-between items-center">
-                    <button id="btn-voltar" class="text-gray-400 hover:text-white transition-colors text-sm font-medium flex items-center gap-2">
-                        <i class="fa-solid fa-arrow-left"></i> Voltar
-                    </button>
-                    <h2 class="text-xl font-medium text-white font-heading">Selecione a Data</h2>
-                    <div class="w-16"></div> <!-- Espaçador para centralizar o título -->
-                </div>
-
-                <div class="flex-grow w-full rounded-xl overflow-hidden bg-[#111111] relative" id="my-cal-inline">
-                    <div class="absolute inset-0 flex flex-col items-center justify-center text-gray-500 z-0 animate-pulse">
-                        <i class="fa-solid fa-circle-notch fa-spin text-3xl text-brand mb-3"></i>
-                        <p>A carregar calendário...</p>
-                    </div>
-                </div>
+            <div class="rounded-2xl border border-white/[.07] bg-black/20 p-4">
+              <i class="fa-brands fa-whatsapp text-gold"></i>
+              <div class="mt-3 text-sm font-semibold">Contato fácil</div>
+              <div class="text-xs text-zinc-500 mt-1">Seus dados já vão preenchidos.</div>
             </div>
+            <div class="rounded-2xl border border-white/[.07] bg-black/20 p-4">
+              <i class="fa-regular fa-clock text-gold"></i>
+              <div class="mt-3 text-sm font-semibold">Pontualidade</div>
+              <div class="text-xs text-zinc-500 mt-1">Chegue 5 min antes.</div>
+            </div>
+          </div>
 
+          <div class="mt-auto pt-8 relative min-h-[210px] sm:min-h-[250px] flex items-end overflow-hidden">
+            <lottie-player src="Barber.json" background="transparent" speed="1" class="absolute right-[-9%] bottom-[-12%] w-[76%] sm:w-[62%] lg:w-[78%] xl:w-[64%] h-auto opacity-85" loop autoplay></lottie-player>
+            <div class="relative z-10 max-w-[230px] pb-2">
+              <div class="w-12 h-px hairline mb-4"></div>
+              <p class="font-display uppercase text-xl tracking-wide">Estilo & excelência</p>
+              <p class="mt-2 text-xs leading-5 text-zinc-500">Onde o clássico encontra o moderno.</p>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <section class="glass border border-white/[.07] rounded-[28px] shadow-glow overflow-hidden min-h-[600px] lg:min-h-[720px] order-1 lg:order-2 flex flex-col">
+        <div class="px-5 sm:px-8 pt-6 sm:pt-8 pb-5 border-b border-white/[.06]">
+          <div class="flex items-center justify-between gap-4">
+            <div>
+              <p class="text-[11px] uppercase tracking-[.18em] text-zinc-500 font-semibold">Reserva</p>
+              <h2 class="font-display uppercase text-2xl sm:text-3xl font-semibold mt-1">Agende seu horário</h2>
+            </div>
+            <div class="hidden sm:flex items-center gap-2 text-xs text-zinc-500">
+              <i class="fa-solid fa-lock text-gold"></i>
+              Dados protegidos
+            </div>
+          </div>
+
+          <div class="mt-6 flex items-center" aria-label="Progresso do agendamento">
+            <div class="flex items-center gap-2 shrink-0">
+              <span id="step-dot-1" class="step-dot active w-8 h-8 rounded-full border border-gold flex items-center justify-center text-xs font-bold transition">1</span>
+              <span id="step-label-1" class="text-xs sm:text-sm font-semibold text-white">Seus dados</span>
+            </div>
+            <div class="mx-3 sm:mx-4 h-px flex-1 bg-white/10 relative overflow-hidden">
+              <span id="step-progress-line" class="absolute inset-y-0 left-0 w-0 bg-gold transition-all duration-500"></span>
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <span id="step-dot-2" class="step-dot w-8 h-8 rounded-full border border-white/10 bg-white/[.03] flex items-center justify-center text-xs font-bold text-zinc-500 transition">2</span>
+              <span id="step-label-2" class="text-xs sm:text-sm font-semibold text-zinc-500 transition">Horário</span>
+            </div>
+          </div>
         </div>
 
-        <!-- Right Column: Info & Imagem/Lottie -->
-        <div class="w-full lg:w-5/12 flex flex-col gap-6 order-2">
-            
-            <!-- Lottie Player -->
-            <div class="relative w-full h-64 sm:h-80 rounded-2xl overflow-hidden shadow-2xl border border-dark-700 bg-dark-900 flex items-center justify-center">
-                
-                <lottie-player 
-                    src="Barber.json" 
-                    background="transparent" 
-                    speed="1" 
-                    style="width: 80%; height: 80%;" 
-                    loop 
-                    autoplay>
-                </lottie-player>
+        <div class="flex-1 p-5 sm:p-8 lg:p-9">
+          <div id="step-1-form" class="h-full flex flex-col justify-center view-enter">
+            <div class="max-w-lg mx-auto w-full">
+              <div class="mb-8">
+                <span class="inline-flex w-11 h-11 rounded-2xl border border-gold/20 bg-gold/[.07] text-gold items-center justify-center mb-5">
+                  <i class="fa-regular fa-user"></i>
+                </span>
+                <h3 class="font-display uppercase text-3xl sm:text-4xl font-semibold tracking-tight">Primeiro, seus dados</h3>
+                <p class="text-zinc-500 mt-3 text-sm leading-6">Usaremos estas informações para identificar sua reserva no calendário.</p>
+              </div>
 
-                <div class="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/40 to-transparent pointer-events-none"></div>
-                <div class="absolute bottom-4 left-4 right-4 z-10 pointer-events-none">
-                    <h2 class="text-2xl font-bold text-white font-heading">Estilo & Excelência</h2>
-                    <p class="text-gray-300 text-sm mt-1">Onde o clássico encontra o moderno.</p>
+              <form id="lead-form" novalidate class="space-y-5">
+                <div>
+                  <label for="cliente-nome" class="block text-xs font-semibold uppercase tracking-[.12em] text-zinc-400 mb-2">Nome completo</label>
+                  <div id="field-nome" class="field h-14 rounded-2xl border border-white/10 bg-black/25 flex items-center px-4 transition">
+                    <i class="fa-regular fa-user text-zinc-600 mr-3"></i>
+                    <input id="cliente-nome" name="nome" type="text" autocomplete="name" placeholder="Ex.: João Silva" class="w-full h-full bg-transparent outline-none text-white placeholder:text-zinc-700 text-[15px]" aria-describedby="erro-nome" />
+                  </div>
+                  <p id="erro-nome" class="hidden mt-2 text-xs text-red-400"><i class="fa-solid fa-circle-exclamation mr-1"></i> Informe seu nome completo.</p>
                 </div>
-            </div>
 
-            <div class="bg-dark-800 rounded-2xl p-6 sm:p-8 border border-dark-700 shadow-xl">
-                <h1 class="text-3xl sm:text-4xl font-bold text-white font-heading mb-4 border-l-4 border-brand pl-4">
-                    Agende o seu <br/><span class="text-brand">Horário</span>
-                </h1>
-                <p class="text-gray-400 mb-6 leading-relaxed">
-                    Escolha a data e o melhor horário no calendário. O sistema irá solicitar os seus dados rapidamente para confirmar a reserva do seu corte.
+                <div>
+                  <label for="cliente-zap" class="block text-xs font-semibold uppercase tracking-[.12em] text-zinc-400 mb-2">WhatsApp com DDD</label>
+                  <div id="field-zap" class="field h-14 rounded-2xl border border-white/10 bg-black/25 flex items-center px-4 transition">
+                    <i class="fa-brands fa-whatsapp text-zinc-600 mr-3"></i>
+                    <input id="cliente-zap" name="whatsapp" type="tel" inputmode="numeric" autocomplete="tel" maxlength="15" placeholder="(62) 99999-9999" class="w-full h-full bg-transparent outline-none text-white placeholder:text-zinc-700 text-[15px]" aria-describedby="erro-zap" />
+                  </div>
+                  <p id="erro-zap" class="hidden mt-2 text-xs text-red-400"><i class="fa-solid fa-circle-exclamation mr-1"></i> Informe um WhatsApp válido com DDD.</p>
+                </div>
+
+                <button id="btn-continuar" type="submit" class="shine group w-full min-h-14 rounded-2xl bg-gold hover:bg-gold2 text-ink font-bold text-[15px] transition shadow-gold flex items-center justify-center gap-3 px-5 disabled:opacity-60 disabled:cursor-not-allowed">
+                  <span id="btn-text">Ver horários disponíveis</span>
+                  <i id="btn-icon" class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </button>
+
+                <p class="text-[11px] leading-5 text-zinc-600 text-center px-2">
+                  <i class="fa-solid fa-shield-halved mr-1 text-zinc-500"></i>
+                  Seus dados são usados para o agendamento e contato relacionado à reserva.
                 </p>
-                
-                <div class="space-y-4">
-                    <div class="flex items-start gap-4">
-                        <div class="w-10 h-10 rounded-full bg-dark-700 text-brand flex items-center justify-center flex-shrink-0">
-                            <i class="fa-solid fa-clock"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-medium text-white">Pontualidade</h3>
-                            <p class="text-sm text-gray-400">Por favor, chegue com 5 minutos de antecedência.</p>
-                        </div>
-                    </div>
-                </div>
+              </form>
             </div>
+          </div>
+
+          <div id="step-2-calendar" class="hidden h-full flex-col view-enter">
+            <div class="flex items-center justify-between gap-3 mb-5">
+              <button id="btn-voltar" type="button" class="h-10 px-3 rounded-xl border border-white/10 bg-white/[.03] hover:bg-white/[.07] text-zinc-400 hover:text-white transition flex items-center gap-2 text-sm">
+                <i class="fa-solid fa-arrow-left"></i><span class="hidden sm:inline">Voltar</span>
+              </button>
+              <div class="text-center">
+                <p class="font-display uppercase text-lg sm:text-xl font-medium">Escolha a data e o horário</p>
+                <p id="calendar-lead-name" class="text-xs text-zinc-500 mt-1"></p>
+              </div>
+              <div class="w-10 sm:w-[72px]"></div>
+            </div>
+
+            <div id="my-cal-inline" class="relative flex-1 rounded-2xl overflow-hidden border border-white/[.06] bg-[#0d0d0d]">
+              <div id="calendar-loader" class="absolute inset-0 z-0 flex flex-col items-center justify-center gap-4 bg-[#0d0d0d] text-zinc-500">
+                <div class="w-10 h-10 rounded-full border-2 border-white/10 border-t-gold animate-spin"></div>
+                <div class="text-sm">Carregando horários disponíveis…</div>
+              </div>
+            </div>
+          </div>
         </div>
+      </section>
+    </section>
 
-    </main>
+    <section class="mt-6 grid md:grid-cols-3 gap-3 text-sm text-zinc-500">
+      <div class="rounded-2xl border border-white/[.06] bg-white/[.02] p-4 flex gap-3 items-start">
+        <i class="fa-solid fa-check text-gold mt-0.5"></i><span>Escolha apenas entre os horários realmente disponíveis.</span>
+      </div>
+      <div class="rounded-2xl border border-white/[.06] bg-white/[.02] p-4 flex gap-3 items-start">
+        <i class="fa-solid fa-mobile-screen-button text-gold mt-0.5"></i><span>Processo otimizado para celular, tablet e computador.</span>
+      </div>
+      <div class="rounded-2xl border border-white/[.06] bg-white/[.02] p-4 flex gap-3 items-start">
+        <i class="fa-solid fa-clock text-gold mt-0.5"></i><span>Para melhor atendimento, chegue 5 minutos antes.</span>
+      </div>
+    </section>
+  </main>
 
-    <!-- Footer -->
-    <footer class="bg-dark-800 border-t border-dark-700 py-6 mt-auto">
-        <div class="max-w-7xl mx-auto px-4 text-center text-gray-500 text-sm">
-            <p>&copy; 2026 Elitte Barbearia. Todos os direitos reservados.</p>
-            <p class="mt-2">Feito com <i class="fa-solid fa-heart text-brand mx-1"></i> para o melhor estilo.</p>
-        </div>
-    </footer>
+  <footer class="border-t border-white/[.06] bg-black/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-7 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-zinc-600">
+      <p>© 2026 Elitte Barbearia. Todos os direitos reservados.</p>
+      <div class="flex items-center gap-4">
+        <a href="https://www.instagram.com/barbeariaaelitte/" target="_blank" rel="noopener noreferrer" class="hover:text-zinc-300 transition">Instagram</a>
+        <a href="https://wa.me/556281540490" target="_blank" rel="noopener noreferrer" class="hover:text-zinc-300 transition">WhatsApp</a>
+      </div>
+    </div>
+  </footer>
 
-    <!-- Botão Flutuante do WhatsApp -->
-    <a href="https://wa.me/556281540490?text=Olá! Gostaria de tirar uma dúvida sobre a barbearia." target="_blank" rel="noopener noreferrer" 
-       class="fixed bottom-6 right-6 bg-[#25D366] hover:bg-[#128C7E] text-white rounded-full w-14 h-14 flex items-center justify-center text-3xl shadow-lg hover:scale-110 transition-transform duration-300 z-50">
-        <i class="fa-brands fa-whatsapp"></i>
-    </a>
+  <a href="https://wa.me/556281540490?text=Olá!%20Gostaria%20de%20tirar%20uma%20dúvida%20sobre%20a%20barbearia." target="_blank" rel="noopener noreferrer" aria-label="Falar no WhatsApp" class="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 w-14 h-14 rounded-2xl bg-[#25D366] hover:bg-[#20bd5a] text-white shadow-2xl flex items-center justify-center text-2xl hover:-translate-y-1 transition">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
 
-    <!-- SCRIPT DE INTEGRAÇÃO DO CAL.COM E WEBHOOK -->
-    <script>
-        // Função para disparar dados para o Webhook do n8n
-        async function enviarParaWebhook(dados) {
-            const webhookUrl = "https://webhook.divulgadigital.net/webhook/3168f2d7-51e9-481d-8f12-b61c3dd7996f";
-            try {
-                await fetch(webhookUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(dados)
-                });
-                console.log("Dados enviados para o webhook com sucesso!", dados.tipo_evento);
-            } catch (error) {
-                console.error("Erro ao enviar dados para o webhook:", error);
-            }
+  <div id="toast-region" class="fixed top-[88px] left-1/2 -translate-x-1/2 z-[70] w-[calc(100%-2rem)] max-w-md pointer-events-none" aria-live="polite"></div>
+
+  <script>
+    const WEBHOOK_URL = 'https://webhook.divulgadigital.net/webhook/3168f2d7-51e9-481d-8f12-b61c3dd7996f';
+    const CAL_LINK_BASE = 'barbeariaelitte/horarios';
+
+    const step1 = document.getElementById('step-1-form');
+    const step2 = document.getElementById('step-2-calendar');
+    const form = document.getElementById('lead-form');
+    const btnContinuar = document.getElementById('btn-continuar');
+    const btnVoltar = document.getElementById('btn-voltar');
+    const inputNome = document.getElementById('cliente-nome');
+    const inputZap = document.getElementById('cliente-zap');
+    const calendarContainer = document.getElementById('my-cal-inline');
+    const calendarLeadName = document.getElementById('calendar-lead-name');
+
+    let calScriptInitialized = false;
+    let currentLead = null;
+
+    function showToast(message, type = 'info') {
+      const region = document.getElementById('toast-region');
+      const tone = type === 'error'
+        ? 'border-red-500/20 text-red-100'
+        : type === 'success'
+          ? 'border-emerald-500/20 text-emerald-50'
+          : 'border-gold/20 text-zinc-100';
+      const icon = type === 'error' ? 'fa-circle-exclamation' : type === 'success' ? 'fa-circle-check' : 'fa-circle-info';
+      const toast = document.createElement('div');
+      toast.className = `pointer-events-auto mb-2 flex items-start gap-3 rounded-2xl border ${tone} bg-[#151515]/95 backdrop-blur-xl shadow-2xl px-4 py-3 opacity-0 -translate-y-2 transition duration-300`;
+      toast.innerHTML = `<i class="fa-solid ${icon} text-gold mt-0.5"></i><p class="text-sm leading-5 flex-1">${message}</p>`;
+      region.appendChild(toast);
+      requestAnimationFrame(() => toast.classList.remove('opacity-0', '-translate-y-2'));
+      setTimeout(() => {
+        toast.classList.add('opacity-0', '-translate-y-2');
+        setTimeout(() => toast.remove(), 300);
+      }, 4200);
+    }
+
+    async function enviarParaWebhook(dados) {
+      try {
+        const response = await fetch(WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(dados),
+          keepalive: true
+        });
+        if (!response.ok) throw new Error(`Webhook HTTP ${response.status}`);
+        return true;
+      } catch (error) {
+        console.error('Erro ao enviar dados para o webhook:', error);
+        return false;
+      }
+    }
+
+    (function (C, A, L) {
+      let p = function (a, ar) { a.q.push(ar); };
+      let d = C.document;
+      C.Cal = C.Cal || function () {
+        let cal = C.Cal; let ar = arguments;
+        if (!cal.loaded) {
+          cal.ns = {}; cal.q = cal.q || [];
+          d.head.appendChild(d.createElement('script')).src = A;
+          cal.loaded = true;
         }
+        if (ar[0] === L) {
+          const api = function () { p(api, arguments); };
+          const namespace = ar[1];
+          api.q = api.q || [];
+          typeof namespace === 'string' ? (cal.ns[namespace] = cal.ns[namespace] || api) : p(cal, ar);
+          return;
+        }
+        p(cal, ar);
+      };
+    })(window, 'https://app.cal.com/embed/embed.js', 'init');
 
-        (function (C, A, L) {
-            let p = function (a, ar) { a.q.push(ar); };
-            let d = C.document;
-            C.Cal = C.Cal || function () {
-                let cal = C.Cal; let ar = arguments;
-                if (!cal.loaded) {
-                    cal.ns = {}; cal.q = cal.q || [];
-                    d.head.appendChild(d.createElement("script")).src = A;
-                    cal.loaded = true;
-                }
-                if (ar[0] === L) {
-                    const api = function () { p(api, arguments); };
-                    const namespace = ar[1];
-                    api.q = api.q || [];
-                    typeof namespace === "string" ? (cal.ns[namespace] = cal.ns[namespace] || api) : p(cal, ar);
-                    return;
-                }
-                p(cal, ar);
-            };
-        })(window, "https://app.cal.com/embed/embed.js", "init");
+    function ensureCalInitialized() {
+      if (calScriptInitialized) return;
+      Cal('init', { origin: 'https://cal.com' });
+      Cal('ui', {
+        styles: { branding: { brandColor: '#d8b45a' } },
+        hideEventTypeDetails: false,
+        layout: 'month_view',
+        theme: 'dark'
+      });
+      Cal('on', {
+        action: 'bookingSuccessful',
+        callback: async (e) => {
+          if (!currentLead) return;
+          await enviarParaWebhook({
+            tipo_evento: 'agendamento_concluido',
+            nome: currentLead.nome,
+            whatsapp: currentLead.whatsapp,
+            horario_agendado: e.detail
+          });
+          showToast('Agendamento concluído com sucesso.', 'success');
+        }
+      });
+      calScriptInitialized = true;
+    }
 
-        // LÓGICA DO FORMULÁRIO + CALENDÁRIO
-        const step1 = document.getElementById('step-1-form');
-        const step2 = document.getElementById('step-2-calendar');
-        const btnContinuar = document.getElementById('btn-continuar');
-        const btnVoltar = document.getElementById('btn-voltar');
-        const inputZap = document.getElementById('cliente-zap');
-        
-        let calInitialized = false;
+    function renderCalendar(lead) {
+      ensureCalInitialized();
+      const locationData = { value: lead.whatsapp, optionValue: '' };
+      const finalLink = `${CAL_LINK_BASE}?name=${encodeURIComponent(lead.nome)}&location=${encodeURIComponent(JSON.stringify(locationData))}&locale=pt-br`;
 
-        // Máscara de WhatsApp em tempo real
-        inputZap.addEventListener('input', function (e) {
-            let valor = e.target.value.replace(/\D/g, ''); // Remove tudo o que não é número
-            let formatado = '';
-            
-            if (valor.length > 0) {
-                formatado = '(' + valor.substring(0, 2);
-                if (valor.length > 2) {
-                    formatado += ') ' + valor.substring(2, 7);
-                    if (valor.length > 7) {
-                        formatado += '-' + valor.substring(7, 11);
-                    }
-                }
-            }
-            e.target.value = formatado;
-        });
+      calendarContainer.innerHTML = `
+        <div id="calendar-loader" class="absolute inset-0 z-0 flex flex-col items-center justify-center gap-4 bg-[#0d0d0d] text-zinc-500">
+          <div class="w-10 h-10 rounded-full border-2 border-white/10 border-t-gold animate-spin"></div>
+          <div class="text-sm">Carregando horários disponíveis…</div>
+        </div>`;
 
-        btnContinuar.addEventListener('click', () => {
-            const nome = document.getElementById('cliente-nome').value.trim();
-            const zapRaw = inputZap.value;
-            const zapLimpo = zapRaw.replace(/\D/g, ''); // Pega apenas os números digitados
+      Cal('inline', {
+        elementOrSelector: '#my-cal-inline',
+        calLink: finalLink,
+        layout: 'month_view',
+        config: {
+          name: lead.nome,
+          location: locationData,
+          theme: 'dark'
+        }
+      });
+    }
 
-            if (!nome || zapLimpo.length < 10) {
-                // Alerta caso não preencha ou o número seja muito curto
-                alert("Por favor, preencha o seu Nome completo e um WhatsApp válido (com DDD) antes de escolher o horário.");
-                return;
-            }
+    function formatPhone(value) {
+      const digits = value.replace(/\D/g, '').slice(0, 11);
+      if (!digits) return '';
+      if (digits.length <= 2) return `(${digits}`;
+      if (digits.length <= 7) return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
+      if (digits.length <= 10) return `(${digits.slice(0, 2)}) ${digits.slice(2, 6)}-${digits.slice(6)}`;
+      return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
+    }
 
-            // Limpa e formata o número para o padrão (ex: +5562999999999)
-            let zap = zapLimpo;
-            if (zap.length > 0 && !zap.startsWith('55')) {
-                zap = '55' + zap;
-            }
-            zap = '+' + zap;
+    function normalizeBrazilPhone(raw) {
+      let digits = raw.replace(/\D/g, '');
+      if (digits.startsWith('55') && (digits.length === 12 || digits.length === 13)) return `+${digits}`;
+      if (digits.length === 10 || digits.length === 11) return `+55${digits}`;
+      return null;
+    }
 
-            // ---- DISPARO 1: Captura de Lead (Abandono de agendamento) ----
-            enviarParaWebhook({
-                tipo_evento: "lead_iniciado",
-                nome: nome,
-                whatsapp: zap
-            });
+    function setFieldError(field, error, invalid) {
+      field.classList.toggle('border-red-500/50', invalid);
+      error.classList.toggle('hidden', !invalid);
+    }
 
+    function validateForm() {
+      const nome = inputNome.value.trim().replace(/\s+/g, ' ');
+      const phone = normalizeBrazilPhone(inputZap.value);
+      const nomeOk = nome.length >= 3 && nome.includes(' ');
+      const zapOk = !!phone;
+      setFieldError(document.getElementById('field-nome'), document.getElementById('erro-nome'), !nomeOk);
+      setFieldError(document.getElementById('field-zap'), document.getElementById('erro-zap'), !zapOk);
+      return { valid: nomeOk && zapOk, nome, whatsapp: phone };
+    }
 
-            // Formata o location EXATAMENTE como um objeto JSON para o Cal.com aceitar
-            const locationData = { value: zap, optionValue: "" };
+    function goToCalendar() {
+      step1.classList.add('hidden');
+      step1.classList.remove('flex');
+      step2.classList.remove('hidden');
+      step2.classList.add('flex');
+      document.getElementById('step-dot-1').classList.remove('active');
+      document.getElementById('step-dot-1').classList.add('done');
+      document.getElementById('step-dot-1').innerHTML = '<i class="fa-solid fa-check"></i>';
+      document.getElementById('step-dot-2').classList.add('active');
+      document.getElementById('step-label-2').classList.remove('text-zinc-500');
+      document.getElementById('step-label-2').classList.add('text-white');
+      document.getElementById('step-progress-line').classList.add('w-full');
+      document.getElementById('step-progress-line').classList.remove('w-0');
+      window.scrollTo({ top: Math.max(0, document.querySelector('main').offsetTop - 70), behavior: 'smooth' });
+    }
 
-            // Esconde Passo 1 e Mostra Passo 2
-            step1.classList.add('hidden');
-            step1.classList.remove('flex');
-            step2.classList.remove('hidden');
-            step2.classList.add('flex');
+    function goToForm() {
+      step2.classList.add('hidden');
+      step2.classList.remove('flex');
+      step1.classList.remove('hidden');
+      step1.classList.add('flex');
+      document.getElementById('step-dot-1').classList.add('active');
+      document.getElementById('step-dot-1').classList.remove('done');
+      document.getElementById('step-dot-1').textContent = '1';
+      document.getElementById('step-dot-2').classList.remove('active');
+      document.getElementById('step-label-2').classList.remove('text-white');
+      document.getElementById('step-label-2').classList.add('text-zinc-500');
+      document.getElementById('step-progress-line').classList.remove('w-full');
+      document.getElementById('step-progress-line').classList.add('w-0');
+      inputNome.focus();
+    }
 
-            // Inicializa o Cal.com injetando os dados e forçando o idioma
-            if (!calInitialized) {
-                Cal("init", {origin:"https://cal.com"});
+    inputZap.addEventListener('input', (e) => {
+      e.target.value = formatPhone(e.target.value);
+      setFieldError(document.getElementById('field-zap'), document.getElementById('erro-zap'), false);
+    });
+    inputNome.addEventListener('input', () => setFieldError(document.getElementById('field-nome'), document.getElementById('erro-nome'), false));
 
-                // Passa os parâmetros via URL com o location codificado como JSON stringificado
-                const finalLink = "barbeariaelitte/horarios?name=" + encodeURIComponent(nome) + 
-                                  "&location=" + encodeURIComponent(JSON.stringify(locationData)) + 
-                                  "&locale=pt-br";
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const result = validateForm();
+      if (!result.valid) {
+        showToast('Revise os campos destacados antes de continuar.', 'error');
+        return;
+      }
 
-                Cal("inline", {
-                    elementOrSelector:"#my-cal-inline",
-                    calLink: finalLink, 
-                    layout: "month_view",
-                    config: {
-                        name: nome,
-                        location: locationData
-                    }
-                });
+      btnContinuar.disabled = true;
+      document.getElementById('btn-text').textContent = 'Preparando agenda…';
+      document.getElementById('btn-icon').className = 'fa-solid fa-circle-notch fa-spin';
 
-                Cal("ui", {
-                    "styles": {
-                        "branding": {
-                            "brandColor": "#d4af37" 
-                        }
-                    },
-                    "hideEventTypeDetails": false,
-                    "layout": "month_view",
-                    "theme": "dark"
-                });
+      currentLead = { nome: result.nome, whatsapp: result.whatsapp };
+      calendarLeadName.textContent = `Horários para ${result.nome.split(' ')[0]}`;
 
-                // ---- DISPARO 2: Agendamento Concluído com Sucesso ----
-                // Fica ouvindo os eventos do Cal.com para pegar o horário escolhido
-                Cal("on", {
-                    action: "bookingSuccessful",
-                    callback: (e) => {
-                        enviarParaWebhook({
-                            tipo_evento: "agendamento_concluido",
-                            nome: nome,
-                            whatsapp: zap,
-                            horario_agendado: e.detail // Retorna todos os dados da reserva (data, hora, etc)
-                        });
-                    }
-                });
-                
-                calInitialized = true;
-            }
-        });
+      enviarParaWebhook({
+        tipo_evento: 'lead_iniciado',
+        nome: currentLead.nome,
+        whatsapp: currentLead.whatsapp
+      });
 
-        // Botão para voltar ao formulário se precisar corrigir dados
-        btnVoltar.addEventListener('click', () => {
-            step2.classList.add('hidden');
-            step2.classList.remove('flex');
-            step1.classList.remove('hidden');
-            step1.classList.add('flex');
-        });
-    </script>
+      goToCalendar();
+      renderCalendar(currentLead);
+
+      btnContinuar.disabled = false;
+      document.getElementById('btn-text').textContent = 'Ver horários disponíveis';
+      document.getElementById('btn-icon').className = 'fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform';
+    });
+
+    btnVoltar.addEventListener('click', goToForm);
+  </script>
 </body>
 </html>
